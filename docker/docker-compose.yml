@@ -29,12 +29,12 @@ services:
        CKAN_DATASTORE_READ: "postgresql://datastore_default:datastore@db:5432/datastore_default"
        CKAN_PUSHER_URL: "http://pusher:8800"
        CKAN_REDIS_URL: "redis://redis:6379/0"
-       CKAN_SITE_URL: "http://10.172.1.109:5000"
+       CKAN_SITE_URL: "http://vocol.kbs.uni-hannover.de:5000"
        CKAN_SOLR_URL: "http://solr:8983/solr/ckan"
        CKAN_SQLALCHEMY_URL: "postgresql://ckan:ckan@db:5432/ckan"
-    volumes:
+    #volumes:
        # - ./ckan-entrypoint.sh:/ckan-entrypoint.sh 
-       - ../Plugins/ckanext-TIBtheme:/usr/lib/ckan/default/src/ckanext-TIBtheme
+       #- ../Plugins/ckanext-TIBtheme:/usr/lib/ckan/default/src/ckanext-TIBtheme
        # - ../Plugins/ckanext-SPARQLWrapper:/usr/lib/ckan/default/src/ckanext-SPARQLWrapper
        # - ../Plugins/ckanext-videoviewer:/usr/lib/ckan/default/src/ckanext-videoviewer
   db:
