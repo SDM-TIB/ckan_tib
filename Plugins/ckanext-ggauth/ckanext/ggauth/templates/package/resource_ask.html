@@ -1,0 +1,42 @@
+{% import 'macros/autoform.html' as autoform %}
+{% import 'macros/form.html' as form %}
+{% extends "package/resource_edit_base.html" %}
+
+{% block subtitle %}{{ _('Ask permission') }} - {{ h.resource_display_name(res) }}{% endblock %}
+
+
+<!-- breadcrumb_content needs to be overriden, EDIT -->
+
+{% block content_primary_nav %}
+{% endblock %}
+
+{% block content_action %}
+{% endblock %}
+
+{% block primary_content_inner %}
+  {{ form.errors(error_summary) }}
+
+  <form method='post' action="" class="form-horizontal" id="ask-permission-form">
+
+    {% block ask_form %}
+
+      Current status: {{data["permission"]["download"]}}
+      {{ form.checkbox('auth.download', 
+         label=_('Ask permission to download'),
+         attrs=attrs["download"]) }}
+
+      Current status: {{data["permission"]["preview"]}}
+      {{ form.checkbox('auth.preview', label=_('Can preview'), attrs=attrs["preview"]) }}
+      
+      Current status: {{data["permission"]["schema"]}}
+      {{ form.checkbox('auth.schema', label=_('Can preview meta-data'), attrs=attrs["schema"]) }}
+
+    {% endblock %}
+    <div class="form-actions">
+      <button type="submit" class="btn btn-primary" name="save">{{ _('Request permissions') }}</button>
+    </div>
+  </form>
+
+
+{% endblock %}
+

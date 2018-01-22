@@ -1,0 +1,77 @@
+  {% set can_edit = h.check_access('package_update', {'id':pkg.id }) %}
+  {% set can_view = h.check_access('resource_on_request', {'user': c.user, 'id':pkg.id, 'resource_id': res.id }) %}
+  {% set url_action = 'resource_edit' if url_is_edit and can_edit else 'resource_read' %}
+  {% set url = h.url_for(controller='package', action=url_action, id=pkg.name, resource_id=res.id) %}
+  {% set ask_url = h.url_for(controller='ckanext.ggauth.controller.permissions:PermissionController', action='ask_permission', id=pkg.name, resource_id=res.id) %}
+  
+  {% ckan_extends %}
+  
+  {% block resource_item_title %}
+  {% if can_view %}
+    <a class="heading" href="{{ url }}" title="{{ res.name or res.description }}">
+  {% else %}
+    <a class="heading" title="{{ res.name or res.description }}">
+  {% endif %}
+    {{ h.resource_display_name(res) | truncate(50) }}<span class="format-label" property="dc:format" data-format="{{ res.format.lower() or 'data' }}">{{ h.get_translated(res, 'format') }}</span>
+    {{ h.popular('views', res.tracking_summary.total, min=10) }}
+  </a>
+  {% endblock %}
+
+  {% block resource_item_explore %}
+  {% if not url_is_edit %}
+  <div class="dropdown btn-group">
+    {% if can_view %}
+    <a href="#" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
+      <i class="fa fa-share"></i>
+      {{ _('Explore') }}
+      <span class="caret"></span>
+    </a>
+    {% else %}
+    <a href="#" class="btn btn-warning dropdown-toggle" data-toggle="dropdown">
+      <i class="fa fa-lock"></i>
+      {{ _('Protected Resource') }}
+      <span class="caret"></span>
+    </a>
+    {% endif %}
+    <ul class="dropdown-menu">
+      {% block resource_item_explore_links %}
+      <li>
+          {% if res.has_views and can_view %}
+        <a href="{{ url }}">
+            <i class="fa fa-bar-chart-o"></i>
+            {{ _('Preview') }}
+        </a>
+          {% else %}
+        <a href="{{ ask_url }}">
+            <i class="fa fa-user"></i>
+            {{ _('Request permission') }}
+        </a>
+          {% endif %}
+      </li>
+      {% if res.url and h.is_url(res.url) and false%}
+      <li>
+        <a href="{{ res.url }}" class="resource-url-analytics" target="_blank">
+          {% if res.has_views %}
+            <i class="fa fa-arrow-circle-o-down"></i>
+            {{ _('Download') }}
+          {% else %}
+            <i class="fa fa-external-link"></i>
+            {{ _('Go to resource') }}
+          {% endif %}
+        </a>
+      </li>
+      {% endif %}
+      {% if can_edit %}
+      <li>
+        <a href="{{ h.url_for(controller='package', action='resource_edit', id=pkg.name, resource_id=res.id) }}">
+          <i class="fa fa-pencil-square-o"></i>
+          {{ _('Edit') }}
+        </a>
+      </li>
+      {% endif %}
+      {% endblock %}
+    </ul>
+  </div>
+  {% endif %}
+  {% endblock %}
+  </li>
