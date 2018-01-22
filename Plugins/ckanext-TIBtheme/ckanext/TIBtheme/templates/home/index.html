@@ -2,66 +2,45 @@
 
 {% block primary_content %}
 
-<div role="main" class="hero">
-  <div class="container">
-    <div class="row row1">
-      <div class="span6 col1">
-        
-          
-
-<div class="module-content box">
-  <header>
-    
-      <h1 class="page-heading">Welcome to TIB CKAN</h1>
-      
-      <p>
-
-      The TIB CKAN prototype was developed to support the aspect of better re-usability of research data. The prototype supports the management and access to heterogeneous research data publications and assists researchers in the selection of relevant data sets for their respective disciplines.
-      </p>
-      <p>
-        The prototype currently offers the following functions for the visualization of research data:
-        <br>
-        ·         Supports data collections and publications with different formats.
-        <br>
-        ·         Different views on the same data set (2D and 3D support).
-        <br>
-        ·         Visualization of Auto CAD files.
-        <br>
-        ·         Jupyter Notes for demonstrating live code.
-        <br>
-        ·         RDF Description of data collections.
-      </p>
-    
-  </header>
-
-  
-          <section class="featured media-overlay hidden-phone">
-              <a class="media-image" href="#">
-                <img src="https://www.tib.eu/typo3conf/ext/tib_tmpl_bootstrap/Resources/Public/images/TIB_Logo_en.png" alt="Placeholder" width="420" height="220">
-              </a>
-          </section>
-        
-        </div>        
+<div class="row col-md-12">
+  <div role="main" class="hero">
+    <div class="container">
+      <div class="row">
+        <div class="span6 col1">
+          {% block promoted %}
+            {% snippet 'home/snippets/layout_new.html' %}
+          {% endblock %}
+        </div>
+        <div class="span6 col1">
+          {% block search %}
+            {% snippet 'home/snippets/search.html' %}
+          {% endblock %}
+        </div>
       </div>
-      <div class="span6 col1">
-        <div class="module module-search module-narrow module-shallow box">
-          <form class="module-content search-form" method="get" action="/dataset">
-            <h3 class="heading">Search data</h3>
-            <div class="search-input control-group search-giant">
-              <input type="text" class="search" name="q" value="" autocomplete="off" placeholder="E.g. environment">
-              <button type="submit">
-                <i class="fa fa-search"></i>
-                <span>Search</span>
-              </button>
-            </div>
-          </form>
-          <div class="tags">
-            <h3>Popular tags</h3>
-          </div>
+    </div>
+  </div>
+
+  <div role="main">
+    <div class="container">
+      <div class="row row2">
+        <div class="col-md-6 col1">
+          {# Note: this featured_group block is used as an example in the theming
+             tutorial in the docs! If you change this code, be sure to check
+             whether you need to update the docs. #}
+          {# Start template block example. #}
+          {% block featured_group %}
+            {% snippet 'home/snippets/featured_group.html' %}
+          {% endblock %}
+          {# End template block example. #}
+        </div>
+        <div class="col-md-6 col2">
+          {% block featured_organization %}
+            {% snippet 'home/snippets/featured_organization.html' %}
+          {% endblock %}
         </div>
       </div>
     </div>
   </div>
 </div>
-
+        
 {% endblock %}
