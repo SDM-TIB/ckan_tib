@@ -1,7 +1,0 @@
-
-        [ckan.plugins]
-        SPARQLWrapper=ckanext.SPARQLWrapper.plugin:SparqlwrapperPlugin
-
-        [babel.extractors]
-        ckan = ckan.lib.extract:extract_ckan
-    
