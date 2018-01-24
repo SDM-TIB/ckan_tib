@@ -42,13 +42,13 @@
 #c.JupyterHub.admin_access = False
 
 ## DEPRECATED since version 0.7.2, use Authenticator.admin_users instead.
-#c.JupyterHub.admin_users = {'auer'}
+c.JupyterHub.admin_users = {'auer'}
 
 ## Allow named single-user servers per user
-#c.JupyterHub.allow_named_servers = False
+c.JupyterHub.allow_named_servers = True
 
 ## Answer yes to any questions (e.g. confirm overwrite)
-c.JupyterHub.answer_yes = True
+#c.JupyterHub.answer_yes = False
 
 ## PENDING DEPRECATION: consider using service_tokens
 #  
@@ -748,8 +748,9 @@ c.Authenticator.whitelist = {'auer'}
 ## The number of threads to allocate for encryption
 #c.CryptKeeper.n_threads = 1
 
+
 c.JupyterHub.tornado_settings = {
     'headers': {
-        'Content-Security-Policy': "child-src * ", 'Access-Control-Allow-Origin': "*"
+        'Content-Security-Policy': "frame-ancestors * ", 'Access-Control-Allow-Origin': "*"
     }
 }
